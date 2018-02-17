@@ -15,11 +15,11 @@ final class WebApplication implements ApplicationInterface
 {
     public function run()
     {
-//        $cityName = (new Request())->get('cityName');
-//        if ($cityName) {
+        $cityName = (new Request())->get('cityName');
+        if ($cityName) {
         $cityName = 'Kiev';
             $commandBus = CommandBus::create();
             $commandBus->handle(new WeatherForecast($cityName, ResponseInterface::WEB));
-//        }
+        }
     }
 }
