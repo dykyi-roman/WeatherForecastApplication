@@ -16,8 +16,8 @@
 + ymfony/event-dispatcher
 + phpdotenv
 + monolog
-- //predis
-- //whoops
++ stash
++ whoops
 - //collision
 
 ## Install
