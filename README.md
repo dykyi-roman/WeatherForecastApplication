@@ -1,8 +1,6 @@
-# WeatherForecastApplication
-
 # READ ME FIRST
-+ Not all functional was able to realize in 6 hours. (master branch)
-+ I am create a second branch (refactoring) and plannig finish Application to Monday.
++ Not all functional was able to realize in 6 hours. [https://github.com/dykyi-roman/WeatherForecastApplication/tree/first](master branch)
++ I am create a second branch (refactoring) and plannig finish Application to Monday. And merge in master after done.
 
 ## Weather Forecast Application
 + Make it possible to use different data sources
