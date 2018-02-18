@@ -12,9 +12,7 @@ use SimpleBus\Command\Command;
 class WeatherForecast implements Command
 {
     private $cityName;
-
     private $responseFormat;
-
     private $outputFileFormat;
 
     /**

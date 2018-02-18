@@ -2,8 +2,8 @@
 
 namespace Dykyi\CommandBus\Handler;
 
-use Dykyi\Formatter\ConsoleFormatter;
-use Dykyi\Formatter\FormatterInterface;
+use Dykyi\CommandBus\Formatter\ConsoleFormatter;
+use Dykyi\CommandBus\Formatter\FormatterInterface;
 use Dykyi\Helpers\TextBuilder;
 
 /**

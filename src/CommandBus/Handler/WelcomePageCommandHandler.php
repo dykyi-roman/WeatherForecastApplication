@@ -23,7 +23,7 @@ class WelcomePageCommandHandler extends Handler implements CommandHandler
             ->add('')
             ->add('Available commands:')
             ->add("Version         - Application version", 2)
-            ->add("WeatherForecast - Weather forecast", 2)
+            ->add("WeatherForecast - WeatherHelper forecast", 2)
             ->add('')
             ->add("**************************************************");
 

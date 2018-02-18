@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykyi\Formatter;
+namespace Dykyi\CommandBus\Formatter;
 
 use Dykyi\Helpers\TextBuilder;
 
@@ -18,8 +18,13 @@ class HtmlFormatter implements FormatterInterface
     {
         $result = '';
         foreach ($text->build() as $i => $line){
-            $result .= sprintf('<p>%s</p>', $line);
+            $result .= sprintf('%s<br>', $line);
         }
         return $result;
+    }
+
+    public static function create()
+    {
+        return new self;
     }
 }

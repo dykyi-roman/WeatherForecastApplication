@@ -13,8 +13,7 @@
 		"simple-bus/message-bus": "^3.0",
 		"symfony/http-foundation": "^3.4",
 		"symfony/event-dispatcher": "^3.4",
-		"guzzlehttp/guzzle": "^6.3",
-		"filp/whoops": "^2.1"
+		"guzzlehttp/guzzle": "^6.3"
 	},
 	"require-dev": {
 

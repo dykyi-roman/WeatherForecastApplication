@@ -10,5 +10,5 @@ interface WeatherRepositoryInterface
 {
     const OPEN_WEATHER_MAP = 'openweathermap';
 
-    public function getWeatherByName(string $cityName);
+    public function getWeatherByCityName(string $name);
 }

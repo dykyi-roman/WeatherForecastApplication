@@ -2,23 +2,26 @@
 
 namespace Dykyi\ValueObjects;
 
+use DateTime;
+use Dykyi\Helpers\WeatherHelper;
+
 /**
- * Class Weather
+ * Class WeatherHelper
  * @package Dykyi\ValueObjects
  */
 class Weather
 {
+    const DATE_FORMAT = 'Y-m-d';
+
     private $city;
-
     private $date;
-
     private $temperature;
 
-    public function __construct(string $city, string $date, string $temperature)
+    public function __construct(string $city, DateTime $date, string $temp)
     {
         $this->city = $city;
         $this->date = $date;
-        $this->temperature = $temperature;
+        $this->temperature = $temp;
     }
 
     /**
@@ -34,7 +37,7 @@ class Weather
      */
     public function getDate(): string
     {
-        return $this->date;
+        return $this->date->format(self::DATE_FORMAT);
     }
 
     /**
@@ -42,7 +45,7 @@ class Weather
      */
     public function getTemperature(): string
     {
-        return $this->date;
+        return$this->temperature;
     }
 
 }

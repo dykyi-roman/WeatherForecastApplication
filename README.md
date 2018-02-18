@@ -13,12 +13,10 @@
 + command-bus
 + guzzle
 + symfony/http-foundation
-+ ymfony/event-dispatcher
++ symfony/event-dispatcher
 + phpdotenv
 + monolog
 + stash
-+ whoops
-- //collision
 
 ## Install
 + composer install && composer dumpautoload -o
@@ -26,8 +24,12 @@
 ## Usage Web
 + http://www.your-web-site/index.php
 
+![image](https://github.com/dykyi-roman/WeatherForecastApplication/blob/master/tests/images/web.png)
+
 ## Usage CLI
 + http://www.your-web-site/index.php WeatherForecast <CITY_NAME> <FILE_FROMAT>
+
+![image](https://github.com/dykyi-roman/WeatherForecastApplication/blob/master/tests/images/cli.png)
 
 ## Tech-Cloud 
 + OOP, Interface, Abstract Class, DI, UnitTest, SQL, Design Pattern, MySQL, Redis, MVC 

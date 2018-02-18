@@ -2,7 +2,8 @@
 
 namespace Dykyi\Services\WeatherForecastService\Repository;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
+use Dykyi\Services\WeatherForecastService\Response\ResponseDataExtractor;
 
 /**
  * Class OpenWeatherMapRepository
@@ -17,13 +18,29 @@ class OpenWeatherMapRepository implements WeatherRepositoryInterface
         $this->options = $options;
     }
 
-    public function getWeatherByName(string $cityName)
+    /**
+     * @param string $name
+     * @return array|null
+     */
+    public function getWeatherByCityName(string $name)
     {
-        //TODO: API connect and get data
-        $client = new Client();
-        $res = $client->request('GET', sprintf($this->options['url'],$cityName, $this->options['key']));
-        $body = $res->getBody();
-        
-        return (string)$body;
+        $client = new GuzzleClient();
+        $response = $client->request('GET', $this->options['url'], [
+            'query' => [
+                'q'     => $name,
+                'units' => 'metric',
+                'APPID' => $this->options['key']
+            ]
+        ]);
+
+        $content = null;
+        if ($response->getStatusCode() === 200)
+        {
+            $extractor = new ResponseDataExtractor();
+            $content = $extractor->extract($response);
+        }
+
+        return $content;
     }
+
 }

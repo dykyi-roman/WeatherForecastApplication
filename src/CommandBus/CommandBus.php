@@ -40,7 +40,7 @@ final class CommandBus
         return [
             'Dykyi\CommandBus\Command\WelcomePage'    => WelcomePageCommandHandler::class,
             'Dykyi\CommandBus\Command\Version'        => VersionCommandHandler::class,
-            'Dykyi\CommandBus\Command\WeatherForecast' => WeatherForecastCommandHandler::class,
+            'Dykyi\CommandBus\Command\WeatherForecast'=> WeatherForecastCommandHandler::class,
         ];
     }
 

@@ -8,7 +8,6 @@ use Dykyi\Services\Events\Event\SaveFileInTheStorageEvent;
 use Dykyi\Services\WeatherForecastService\Repository\WeatherRepositoryFactory;
 use Dykyi\Services\WeatherForecastService\WeatherForecastRequest;
 use Dykyi\Services\WeatherForecastService\WeatherForecastService;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -35,7 +34,6 @@ class WeatherForecastCommandHandler
             );
             $service = new WeatherForecastService($repository);
             $data = $service->execute($request);
-
             if (!is_null($request->getOutputFileFormat())) {
                 $event = new SaveFileInTheStorageEvent($request->getOutputFileFormat(), $data);
                 $service->getEventDispatcher()->dispatch('output.file.action', $event);

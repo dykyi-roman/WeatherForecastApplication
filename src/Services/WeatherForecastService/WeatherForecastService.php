@@ -4,6 +4,7 @@ namespace Dykyi\Services\WeatherForecastService;
 
 use Dykyi\Services\Service;
 use Dykyi\Services\WeatherForecastService\Repository\WeatherRepositoryInterface;
+use Dykyi\ValueObjects\Weather;
 
 /**
  * Class WeatherForecastService
@@ -20,11 +21,16 @@ class WeatherForecastService extends Service
         $this->repository = $repository;
     }
 
-    private function converter($city, array $data)
+    private function converter($weather): array
     {
-        //TODO: Convert API response to Weather objects
-//        new Weather($city,'','');
-        return [];
+        if ($weather === null) {
+            return [];
+        }
+
+        $date = new \DateTime();
+        $date->setTimestamp($weather->dt);
+
+        return [new Weather($weather->name, $date, $weather->main->temp)];
     }
 
     /**
@@ -33,9 +39,7 @@ class WeatherForecastService extends Service
      */
     public function execute(WeatherForecastRequest $request): array
     {
-        $city = $request->getCity()->getName();
-        $data = $this->repository->getWeatherByName($city);
-
-        return $this->converter($city, $data);
+        $data = $this->repository->getWeatherByCityName($request->getCity()->getName());
+        return $this->converter($data);
     }
 }

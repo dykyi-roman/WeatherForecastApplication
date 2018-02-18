@@ -25,7 +25,7 @@ class Listener implements LoggerAwareInterface
     {
         $storage = StorageFactory::create($event->getFileExt());
         $storage->save($event->getOutputFileFormat(), $event->getData());
-        $this->logger->info('File is export');
+        $this->logger->info('Data save success');
     }
 
     /**

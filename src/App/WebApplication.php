@@ -15,11 +15,13 @@ final class WebApplication implements ApplicationInterface
 {
     public function run()
     {
-//        $cityName = (new Request())->get('cityName');
-//        if ($cityName) {
-        $cityName = 'Kiev';
+        require_once('view/weather.php');
+
+        $request = Request::createFromGlobals();
+        $cityName = $request->get('city-name');
+        if ($cityName) {
             $commandBus = CommandBus::create();
-            $commandBus->handle(new WeatherForecast($cityName, ResponseInterface::WEB));
-//        }
+            $commandBus->handle(new WeatherForecast($cityName, null,ResponseInterface::WEB));
+        }
     }
 }
