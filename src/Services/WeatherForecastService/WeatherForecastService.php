@@ -56,7 +56,7 @@ class WeatherForecastService extends Service
             $this->cache->save($item);
         }
 
-        $result = $this->convert($item->get());
+        $result = $this->convert($item->get() === null ? $data : $item->get());
         $this->saveToFile($request, $result);
 
         return $result;
