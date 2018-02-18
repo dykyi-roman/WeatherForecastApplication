@@ -4,7 +4,7 @@ namespace Dykyi\Services\WeatherForecastService\Storage;
 
 /**
  * Interface FileStorageInterface
- * @package Dykyi\Repository
+ * @package Dykyi\Clients
  */
 interface FileStorageInterface
 {

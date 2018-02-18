@@ -3,7 +3,7 @@
 namespace Dykyi\Services\Events;
 
 use Dykyi\Services\Events\Event\SaveFileInTheStorageEvent;
-use Dykyi\Services\WeatherForecastService\Storage\StorageFactory;
+use Dykyi\Services\WeatherForecastService\Storage\Storage;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -23,8 +23,7 @@ class Listener implements LoggerAwareInterface
      */
     public function onSaveWeatherToFileAction(SaveFileInTheStorageEvent $event)
     {
-        $storage = StorageFactory::create($event->getFileExt());
-        $storage->save($event->getOutputFileFormat(), $event->getData());
+        $event->getStorage()->save($event->getFileName(), $event->getData());
         $this->logger->info('File is export');
     }
 

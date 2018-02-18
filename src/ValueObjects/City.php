@@ -3,7 +3,7 @@
 namespace Dykyi\ValueObjects;
 
 /**
- * Class CityName
+ * Class City
  * @package Dykyi\ValueObjects
  */
 class City

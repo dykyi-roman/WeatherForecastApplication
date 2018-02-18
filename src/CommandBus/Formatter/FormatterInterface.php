@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykyi\Formatter;
+namespace Dykyi\CommandBus\Formatter;
 
 use Dykyi\Helpers\TextBuilder;
 

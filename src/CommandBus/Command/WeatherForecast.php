@@ -12,23 +12,21 @@ use SimpleBus\Command\Command;
 class WeatherForecast implements Command
 {
     private $cityName;
-
     private $responseFormat;
-
-    private $outputFileFormat;
+    private $outputFile;
 
     /**
      * WeatherForecast constructor.
      *
      * @param string $cityName
      * @param null $responseFormat
-     * @param null $outputFileFormat
+     * @param null $outputFile
      */
-    public function __construct(string $cityName, $outputFileFormat = null, $responseFormat = null)
+    public function __construct(string $cityName, $outputFile = null, $responseFormat = null)
     {
-        $this->cityName         = $cityName;
-        $this->responseFormat   = $responseFormat ?? ResponseInterface::CONSOLE;
-        $this->outputFileFormat = $outputFileFormat;
+        $this->cityName       = $cityName;
+        $this->outputFile     = $outputFile;
+        $this->responseFormat = $responseFormat ?? ResponseInterface::CONSOLE;
     }
 
     public function getCityName(): string
@@ -41,9 +39,9 @@ class WeatherForecast implements Command
         return $this->responseFormat;
     }
 
-    public function getOutputFileFormat()
+    public function getOutputFile()
     {
-        return $this->outputFileFormat;
+        return $this->outputFile;
     }
 
     public function name()

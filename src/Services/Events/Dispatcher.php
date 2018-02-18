@@ -22,7 +22,7 @@ final class Dispatcher
         $listener = new Listener();
         $listener->setLogger($logger);
 
-        $eventDispatcher->addListener('output.file.action', [$listener, 'onSaveWeatherToFileAction']);
+        $eventDispatcher->addListener('save.file.action', [$listener, 'onSaveWeatherToFileAction']);
         // Add your action here!
 
         $subscriber = new Subscriber();

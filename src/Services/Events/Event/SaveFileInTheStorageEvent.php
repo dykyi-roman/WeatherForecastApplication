@@ -2,6 +2,7 @@
 
 namespace Dykyi\Services\Events\Event;
 
+use Dykyi\Services\WeatherForecastService\Storage\FileStorageInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -10,19 +11,25 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class SaveFileInTheStorageEvent extends Event
 {
-    private $outputFileFormat;
-
+    private $storage;
+    private $fileName;
     private $data;
 
-    public function __construct(string $outputFileFormat, array $data)
+    public function __construct(FileStorageInterface $storage, string $fileName, array $data)
     {
-        $this->outputFileFormat = $outputFileFormat;
-        $this->data = $data;
+        $this->storage  = $storage;
+        $this->fileName = $fileName;
+        $this->data     = $data;
     }
 
-    public function getOutputFileFormat(): string
+    public function getFileName(): string
     {
-        return $this->outputFileFormat;
+        return $this->fileName;
+    }
+
+    public function getStorage(): FileStorageInterface
+    {
+        return $this->storage;
     }
 
     public function getData(): array
@@ -30,15 +37,4 @@ class SaveFileInTheStorageEvent extends Event
         return $this->data;
     }
 
-
-    public function getFileExt()
-    {
-        //TODO: some logic
-        $format = explode('.', $this->getOutputFileFormat());
-        if (count($format) !== 2) {
-            throw new \InvalidArgumentException();
-        }
-
-        return $format[1];
-    }
 }

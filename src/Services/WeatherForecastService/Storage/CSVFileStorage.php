@@ -6,7 +6,7 @@ use Dykyi\ValueObjects\Weather;
 
 /**
  * Class CSVFileRepository
- * @package Dykyi\Services\WeatherForecastService\Repository
+ * @package Dykyi\Services\WeatherForecastService\Clients
  */
 class CSVFileStorage implements FileStorageInterface
 {
