@@ -3,7 +3,7 @@
 namespace Dykyi\ValueObjects;
 
 /**
- * Class ArgvInput
+ * Class CommandInput
  * @package Dykyi\ValueObjects
  */
 class CommandInput

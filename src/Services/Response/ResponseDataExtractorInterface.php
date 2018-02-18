@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykyi\Services\WeatherForecastService\Response;
+namespace Dykyi\Services\Response;
 
 use Psr\Http\Message\ResponseInterface;
 

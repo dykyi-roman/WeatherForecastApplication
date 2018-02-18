@@ -1,12 +1,12 @@
 <?php
 
-namespace Dykyi\Services\WeatherForecastService\Response;
+namespace Dykyi\Services\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class ResponseDataExtractor
- * @package Dykyi\Services\WeatherForecastService\Repository
+ * @package Dykyi\Services\WeatherForecastService\Clients
  */
 class ResponseDataExtractor implements ResponseDataExtractorInterface
 {

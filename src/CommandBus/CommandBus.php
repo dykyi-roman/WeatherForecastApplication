@@ -3,11 +3,7 @@
 namespace Dykyi\CommandBus;
 
 use Dykyi\CommandBus\{
-    Handler\WeatherForecastCommandHandler,
-    Handler\VersionCommandHandler,
-    Handler\WelcomePageCommandHandler,
-    Exception\CommandHandlerNotFound,
-    Command\WelcomePage
+    Command\WeatherForecast, Handler\WeatherForecastCommandHandler, Handler\VersionCommandHandler, Handler\WelcomePageCommandHandler, Exception\CommandHandlerNotFound, Command\WelcomePage
 };
 use SimpleBus\Command\Command;
 use SimpleBus\Message\{
@@ -21,10 +17,10 @@ use SimpleBus\Message\{
     Name\ClassBasedNameResolver
 
 };
-use Psr\Log\{LoggerInterface,LogLevel,NullLogger};
+use Psr\Log\{
+    LoggerInterface, LogLevel, NullLogger
+};
 use Dykyi\ValueObjects\CommandInput;
-
-
 
 /**
  * Class CommandBus
@@ -32,15 +28,15 @@ use Dykyi\ValueObjects\CommandInput;
  */
 final class CommandBus
 {
-    /** @var MessageBusSupportingMiddleware  */
+    /** @var MessageBusSupportingMiddleware */
     private $bus;
 
     private function getEventSubscribersByEventName(): array
     {
         return [
-            'Dykyi\CommandBus\Command\WelcomePage'    => WelcomePageCommandHandler::class,
-            'Dykyi\CommandBus\Command\Version'        => VersionCommandHandler::class,
-            'Dykyi\CommandBus\Command\WeatherForecast'=> WeatherForecastCommandHandler::class,
+            WelcomePage::class => WelcomePageCommandHandler::class,
+            Command::class => VersionCommandHandler::class,
+            WeatherForecast::class => WeatherForecastCommandHandler::class,
         ];
     }
 

@@ -4,8 +4,8 @@ namespace Dykyi\CommandBus\Handler;
 
 use Dykyi\Response\ResponseFactory;
 use Dykyi\CommandBus\Command\WeatherForecast;
-use Dykyi\Services\Events\Event\SaveFileInTheStorageEvent;
-use Dykyi\Services\WeatherForecastService\Repository\WeatherRepositoryFactory;
+use Dykyi\Services\WeatherForecastService\Repository\RedisCache;
+use Dykyi\Services\WeatherForecastService\Repository\WeatherClientFactory;
 use Dykyi\Services\WeatherForecastService\WeatherForecastRequest;
 use Dykyi\Services\WeatherForecastService\WeatherForecastService;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,22 +22,19 @@ class WeatherForecastCommandHandler
             $request = new WeatherForecastRequest(
                 $command->getCityName(),
                 $command->getResponseFormat(),
-                $command->getOutputFileFormat()
+                $command->getOutputFile()
             );
 
-            $repository = WeatherRepositoryFactory::create(
+            $client = WeatherClientFactory::create(
                 getenv('API_SERVICE'),
                 [
                     'url' => getenv('API_URL'),
                     'key' => getenv('API_KEY')
                 ]
             );
-            $service = new WeatherForecastService($repository);
+
+            $service = new WeatherForecastService($client, new RedisCache());
             $data = $service->execute($request);
-            if (!is_null($request->getOutputFileFormat())) {
-                $event = new SaveFileInTheStorageEvent($request->getOutputFileFormat(), $data);
-                $service->getEventDispatcher()->dispatch('output.file.action', $event);
-            }
 
             $responseObject = ResponseFactory::create($request->getResponseFormat());
             $response = new Response($responseObject->response($data));

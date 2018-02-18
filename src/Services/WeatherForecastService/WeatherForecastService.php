@@ -2,8 +2,11 @@
 
 namespace Dykyi\Services\WeatherForecastService;
 
+use Dykyi\Services\Events\Event\SaveFileInTheStorageEvent;
 use Dykyi\Services\Service;
-use Dykyi\Services\WeatherForecastService\Repository\WeatherRepositoryInterface;
+use Dykyi\Services\WeatherForecastService\Repository\WeatherClientInterface;
+use Dykyi\Services\WeatherForecastService\Repository\WeatherCacheInterface;
+use Dykyi\Services\WeatherForecastService\Storage\Storage;
 use Dykyi\ValueObjects\Weather;
 
 /**
@@ -12,16 +15,20 @@ use Dykyi\ValueObjects\Weather;
  */
 class WeatherForecastService extends Service
 {
-    /** @var WeatherRepositoryInterface */
-    private $repository;
+    /** @var WeatherClientInterface */
+    private $client;
 
-    public function __construct(WeatherRepositoryInterface $repository)
+    /** @var WeatherCacheInterface */
+    private $cache;
+
+    public function __construct(WeatherClientInterface $client, WeatherCacheInterface $cache)
     {
         parent::__construct();
-        $this->repository = $repository;
+        $this->client = $client;
+        $this->cache  = $cache;
     }
 
-    private function converter($weather): array
+    private function convert($weather): array
     {
         if ($weather === null) {
             return [];
@@ -39,7 +46,25 @@ class WeatherForecastService extends Service
      */
     public function execute(WeatherForecastRequest $request): array
     {
-        $data = $this->repository->getWeatherByCityName($request->getCity()->getName());
-        return $this->converter($data);
+        $data = $this->client->getWeatherByCityName($request->getCity()->getName());
+
+        $result = $this->convert($data);
+        $this->cache->save($result);
+        $this->saveToFile($request, $result);
+
+        return $result;
+    }
+
+    /**
+     * @param WeatherForecastRequest $request
+     * @param $data
+     */
+    private function saveToFile(WeatherForecastRequest $request, $data)
+    {
+        if (!is_null($request->getOutputFile())) {
+            $storage = Storage::create($request->getOutputFileExt());
+            $event = new SaveFileInTheStorageEvent($storage, $request->getOutputFile(), $data);
+            $this->getEventDispatcher()->dispatch('save.file.action', $event);
+        }
     }
 }

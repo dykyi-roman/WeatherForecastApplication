@@ -3,10 +3,10 @@
 namespace Dykyi\Services\WeatherForecastService\Repository;
 
 /**
- * Interface WeatherRepositoryInterface
- * @package Dykyi\Repository
+ * Interface WeatherClientInterface
+ * @package Dykyi\Clients
  */
-interface WeatherRepositoryInterface
+interface WeatherClientInterface
 {
     const OPEN_WEATHER_MAP = 'openweathermap';
 

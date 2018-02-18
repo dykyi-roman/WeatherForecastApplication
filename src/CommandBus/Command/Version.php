@@ -10,7 +10,7 @@ use SimpleBus\Command\Command;
  */
 class Version implements Command
 {
-    const VERSION_ID = '1.0';
+    const VERSION_ID = '1.1';
     /**
      * @return string
      */

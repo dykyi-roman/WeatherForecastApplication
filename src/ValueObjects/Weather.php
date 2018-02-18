@@ -3,10 +3,9 @@
 namespace Dykyi\ValueObjects;
 
 use DateTime;
-use Dykyi\Helpers\WeatherHelper;
 
 /**
- * Class WeatherHelper
+ * Class Weather
  * @package Dykyi\ValueObjects
  */
 class Weather
@@ -17,11 +16,11 @@ class Weather
     private $date;
     private $temperature;
 
-    public function __construct(string $city, DateTime $date, string $temp)
+    public function __construct(string $city, DateTime $date, string $temperature)
     {
         $this->city = $city;
         $this->date = $date;
-        $this->temperature = $temp;
+        $this->temperature = $temperature;
     }
 
     /**
@@ -45,7 +44,7 @@ class Weather
      */
     public function getTemperature(): string
     {
-        return$this->temperature;
+        return $this->temperature;
     }
 
 }

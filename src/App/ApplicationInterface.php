@@ -8,5 +8,6 @@ namespace Dykyi\App;
  */
 interface ApplicationInterface
 {
+
     public function run();
 }

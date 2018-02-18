@@ -12,16 +12,14 @@ class WeatherForecastRequest
 {
     /** @var City */
     private $city;
-
     private $responseFormat;
+    private $outputFile;
 
-    private $outputFileFormat;
-
-    public function __construct(string $cityName, string $responseFormat, $outputFileFormat)
+    public function __construct(string $cityName, string $responseFormat, $outputFile)
     {
-        $this->city             = new City($cityName);
-        $this->responseFormat   = $responseFormat;
-        $this->outputFileFormat = $outputFileFormat;
+        $this->city           = new City($cityName);
+        $this->responseFormat = $responseFormat;
+        $this->outputFile     = $outputFile;
     }
 
     public function getCity(): City
@@ -34,9 +32,20 @@ class WeatherForecastRequest
         return $this->responseFormat;
     }
 
-    public function getOutputFileFormat()
+    public function getOutputFile()
     {
-        return $this->outputFileFormat;
+        return $this->outputFile;
+    }
+
+    public function getOutputFileExt()
+    {
+        //TODO: some logic
+        $format = explode('.', $this->getOutputFile());
+        if (count($format) !== 2) {
+            throw new \InvalidArgumentException();
+        }
+
+        return $format[1];
     }
 
 }

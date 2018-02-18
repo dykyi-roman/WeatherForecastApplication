@@ -3,13 +3,13 @@
 namespace Dykyi\Services\WeatherForecastService\Repository;
 
 use GuzzleHttp\Client as GuzzleClient;
-use Dykyi\Services\WeatherForecastService\Response\ResponseDataExtractor;
+use Dykyi\Services\Response\ResponseDataExtractor;
 
 /**
- * Class OpenWeatherMapRepository
- * @package Dykyi\Services\WeatherForecastService\Repository
+ * Class OpenWeatherMapClient
+ * @package Dykyi\Services\WeatherForecastService\Clients
  */
-class OpenWeatherMapRepository implements WeatherRepositoryInterface
+class OpenWeatherMapClient implements WeatherClientInterface
 {
     private $options;
 
