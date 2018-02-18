@@ -5,9 +5,10 @@ namespace Dykyi\Services\WeatherForecastService;
 use Dykyi\Services\Events\Event\SaveFileInTheStorageEvent;
 use Dykyi\Services\Service;
 use Dykyi\Services\WeatherForecastService\Repository\WeatherClientInterface;
-use Dykyi\Services\WeatherForecastService\Repository\WeatherCacheInterface;
 use Dykyi\Services\WeatherForecastService\Storage\Storage;
 use Dykyi\ValueObjects\Weather;
+use Stash\Interfaces\DriverInterface;
+use Stash\Pool;
 
 /**
  * Class WeatherForecastService
@@ -18,14 +19,14 @@ class WeatherForecastService extends Service
     /** @var WeatherClientInterface */
     private $client;
 
-    /** @var WeatherCacheInterface */
+    /** @var DriverInterface */
     private $cache;
 
-    public function __construct(WeatherClientInterface $client, WeatherCacheInterface $cache)
+    public function __construct(WeatherClientInterface $client, DriverInterface $cache)
     {
         parent::__construct();
         $this->client = $client;
-        $this->cache  = $cache;
+        $this->cache  = new Pool($cache);
     }
 
     private function convert($weather): array
@@ -46,10 +47,16 @@ class WeatherForecastService extends Service
      */
     public function execute(WeatherForecastRequest $request): array
     {
-        $data = $this->client->getWeatherByCityName($request->getCity()->getName());
+        $item = $this->cache->getItem($request->getCity()->getName());
+        if($item->isMiss()){
+            $data = $this->client->getWeatherByCityName($request->getCity()->getName());
+            $item->lock();
+            $item->set($data);
+            $item->expiresAfter(getenv('CACHE_EXPIRE'));
+            $this->cache->save($item);
+        }
 
-        $result = $this->convert($data);
-        $this->cache->save($result);
+        $result = $this->convert($item->get());
         $this->saveToFile($request, $result);
 
         return $result;

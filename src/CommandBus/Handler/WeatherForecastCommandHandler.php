@@ -8,6 +8,8 @@ use Dykyi\Services\WeatherForecastService\Repository\RedisCache;
 use Dykyi\Services\WeatherForecastService\Repository\WeatherClientFactory;
 use Dykyi\Services\WeatherForecastService\WeatherForecastRequest;
 use Dykyi\Services\WeatherForecastService\WeatherForecastService;
+use Stash\Driver\Ephemeral;
+use Stash\Driver\FileSystem;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -33,7 +35,7 @@ class WeatherForecastCommandHandler
                 ]
             );
 
-            $service = new WeatherForecastService($client, new RedisCache());
+            $service = new WeatherForecastService($client, new FileSystem());
             $data = $service->execute($request);
 
             $responseObject = ResponseFactory::create($request->getResponseFormat());

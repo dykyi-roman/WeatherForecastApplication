@@ -6,14 +6,15 @@
 	"license": ["MIT"],
 	"minimum-stability": "stable",
 	"require": {
-		"php": ">= 7.2",
+		"php": ">= 7.0",
 		"monolog/monolog": "^1.23",
 		"vlucas/phpdotenv": "^2.4",
 		"simple-bus/command-bus": "^1.0",
 		"simple-bus/message-bus": "^3.0",
 		"symfony/http-foundation": "^3.4",
 		"symfony/event-dispatcher": "^3.4",
-		"guzzlehttp/guzzle": "^6.3"
+		"guzzlehttp/guzzle": "^6.3",
+		"tedivm/stash": "^0.14.2"
 	},
 	"require-dev": {
 
