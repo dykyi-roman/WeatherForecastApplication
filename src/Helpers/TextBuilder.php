@@ -29,6 +29,11 @@ final class TextBuilder
         return $this;
     }
 
+    public function clear()
+    {
+        $this->text = [];
+    }
+
     public function build(): array
     {
         return $this->text;

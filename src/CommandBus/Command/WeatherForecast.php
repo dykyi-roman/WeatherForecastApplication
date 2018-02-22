@@ -21,9 +21,15 @@ class WeatherForecast implements Command
      * @param string $cityName
      * @param null $responseFormat
      * @param null $outputFile
+     *
+     * @throws \DomainException
      */
     public function __construct(string $cityName, $outputFile = null, $responseFormat = null)
     {
+        if (empty($cityName)) {
+            throw new \DomainException('Missing required "city" parameter');
+        }
+
         $this->cityName       = $cityName;
         $this->outputFile     = $outputFile;
         $this->responseFormat = $responseFormat ?? ResponseInterface::CONSOLE;

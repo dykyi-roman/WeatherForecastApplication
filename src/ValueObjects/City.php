@@ -41,18 +41,18 @@ class City
     private function assertNotEmpty(string $name)
     {
         if (empty($name)) {
-            throw new \DomainException('Empty city name');
+            throw new \DomainException('Empty city name', 1);
         }
     }
 
     private function assertFitsLength(string $name)
     {
         if (strlen($name) < self::MIN_LENGTH) {
-            throw new \DomainException('City name is too sort');
+            throw new \DomainException('City name is too short', 2);
         }
 
         if (strlen($name) > self::MAX_LENGTH) {
-            throw new \DomainException('City name is too long');
+            throw new \DomainException('City name is too long', 3);
         }
     }
 }

@@ -31,7 +31,7 @@ class CommandInput
      *
      * @param array $argv
      */
-    private function parseArgument(array $argv) //: void
+    private function parseArgument(array $argv)
     {
         $tempArray = $argv;
         array_shift($tempArray);
@@ -56,6 +56,16 @@ class CommandInput
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    public function equals(CommandInput $input): bool
+    {
+        return $input->getCommand() === $this->getCommand();
+    }
+
+    public static function fromInput(CommandInput $input): CommandInput
+    {
+        return new self(['', $input->getCommand(), implode(',', $input->getOptions())]);
     }
 
 }

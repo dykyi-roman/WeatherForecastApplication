@@ -4,7 +4,7 @@ namespace Dykyi\Services\WeatherForecastService;
 
 use Dykyi\Services\Events\Event\SaveFileInTheStorageEvent;
 use Dykyi\Services\Service;
-use Dykyi\Services\WeatherForecastService\Repository\WeatherClientInterface;
+use Dykyi\Services\WeatherForecastService\Clients\WeatherClientInterface;
 use Dykyi\Services\WeatherForecastService\Storage\Storage;
 use Dykyi\ValueObjects\Weather;
 use Stash\Interfaces\DriverInterface;
@@ -57,7 +57,7 @@ class WeatherForecastService extends Service
             $this->cache->save($item);
         }
 
-        $result = $this->convert($item->get() === null ? $data : $item->get());
+        $result = $this->convert($item->get() ?? $data);
         $this->saveToFile($request, $result);
 
         return $result;
@@ -69,7 +69,7 @@ class WeatherForecastService extends Service
      */
     private function saveToFile(WeatherForecastRequest $request, $data)
     {
-        if (!is_null($request->getOutputFile())) {
+        if (null !== $request->getOutputFile()) {
             $storage = Storage::create($request->getOutputFileExt());
             $event = new SaveFileInTheStorageEvent($storage, $request->getOutputFile(), $data);
             $this->getEventDispatcher()->dispatch('save.file.action', $event);

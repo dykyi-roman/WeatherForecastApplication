@@ -1,6 +1,6 @@
 <?php
 
-namespace Dykyi\Services\WeatherForecastService\Repository;
+namespace Dykyi\Services\WeatherForecastService\Clients;
 
 use GuzzleHttp\Client as GuzzleClient;
 use Dykyi\Services\Response\ResponseDataExtractor;

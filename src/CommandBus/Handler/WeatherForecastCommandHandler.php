@@ -4,11 +4,9 @@ namespace Dykyi\CommandBus\Handler;
 
 use Dykyi\Response\ResponseFactory;
 use Dykyi\CommandBus\Command\WeatherForecast;
-use Dykyi\Services\WeatherForecastService\Repository\RedisCache;
-use Dykyi\Services\WeatherForecastService\Repository\WeatherClientFactory;
+use Dykyi\Services\WeatherForecastService\Clients\WeatherClientFactory;
 use Dykyi\Services\WeatherForecastService\WeatherForecastRequest;
 use Dykyi\Services\WeatherForecastService\WeatherForecastService;
-use Stash\Driver\Ephemeral;
 use Stash\Driver\FileSystem;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,6 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class WeatherForecastCommandHandler
 {
+    /**
+     * @param WeatherForecast $command
+     * @throws \Throwable
+     */
     public function handle(WeatherForecast $command)
     {
         try {
