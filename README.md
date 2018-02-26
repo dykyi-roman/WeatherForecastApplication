@@ -1,7 +1,3 @@
-# READ ME FIRST
-+ Not all functional was able to realize in 6 hours. [https://github.com/dykyi-roman/WeatherForecastApplication/tree/first](master branch)
-+ I am create a second branch (refactoring) and merge it in master.
-
 ## Weather Forecast Application
 + Make it possible to use different data sources
 + Provide the possibility to specify the export format (CSV, HTML, ...) to store it into a file 
