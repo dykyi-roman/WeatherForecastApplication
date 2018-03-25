@@ -3,6 +3,9 @@
 + Provide the possibility to specify the export format (CSV, HTML, ...) to store it into a file 
 + Has a WEB and CLI version 
 
+## CQRS Architecture pattern 
+![image](https://github.com/dykyi-roman/WeatherForecastApplication/blob/master/img/cqrs.png)
+
 ## Usage package
 + command-bus
 + guzzle
